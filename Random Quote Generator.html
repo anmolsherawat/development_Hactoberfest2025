@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Quote Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f0f0f0;
+    }
+    #quote-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    #quote {
+      font-size: 20px;
+      font-style: italic;
+    }
+    #author {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="quote-box">
+    <div id="quote">Loading...</div>
+    <div id="author"></div>
+    <button onclick="getQuote()">New Quote</button>
+  </div>
+
+  <script>
+    async function getQuote() {
+      const res = await fetch('https://api.quotable.io/random');
+      const data = await res.json();
+      document.getElementById('quote').innerText = `"${data.content}"`;
+      document.getElementById('author').innerText = `- ${data.author}`;
+    }
+    getQuote();
+  </script>
+</body>
+</html>
